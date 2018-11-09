@@ -1,0 +1,11 @@
+Django==2.0.2
+django-admin-tools==0.8.1
+django-ckeditor==5.6.1
+django-cors-headers==2.4.0
+django-environ==0.4.5
+django-filter==1.1.0
+django-js-asset==1.1.0
+django-preferences==0.2
+urllib3==1.23
+psycopg2==2.7.4
+psycopg2-binary==2.7.4
