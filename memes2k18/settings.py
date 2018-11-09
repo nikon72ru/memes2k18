@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'memes2k18',
         'USER': 'admin',
         'PASSWORD': 'letmein',
-        'HOST': 'localhost',
+        'HOST': '95.213.28.134',
         'PORT': '5432',
     }
 }
