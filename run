@@ -1,0 +1,2 @@
+#!/bin/bash
+python3.6 manage.py runserver 95.213.28.134:80
