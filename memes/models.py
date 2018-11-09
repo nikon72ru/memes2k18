@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.utils import timezone
 
 # Create your models here.
 
@@ -68,8 +69,8 @@ class Meme(models.Model):
         blank=True,
         null=True
     )
-    cluster_text = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING)
-    cluster_label = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING)
+    cluster_text = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_text')
+    cluster_label = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_label')
 
 
 

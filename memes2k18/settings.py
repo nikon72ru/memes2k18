@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['95.213.28.134']
 # Application definition
 
 INSTALLED_APPS = [
+    'memes.apps.MemesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
