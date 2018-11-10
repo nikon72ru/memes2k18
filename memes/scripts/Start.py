@@ -1,39 +1,63 @@
-import DynamicTopics
+import memes.scripts.DynamicTopics as DynamicTopics
+import memes.scripts.Preprocessings as Preprocessings
 from memes import models
 import gensim
+import pyLDAvis.gensim
+pyLDAvis.enable_notebook()
 
 def Start():
     list_texts = []
     list_tags = []
     memes = models.Meme.objects.all()
     for mem in memes:
-        list_texts.append(mem.ru_text.split(' '))
-        list_tags.append(mem.labels.split(' '))
-    
-    dictionary_texts = gensim.corpora.Dictionary(list_texts)
+        list_texts.append(' '.join(mem.lem_text.split(' ')).split())   
+        list_tags.append(' '.join(mem.labels.split(' ')).split())
+        
+    bigram = gensim.models.Phrases(list_texts, min_count=5, threshold=20)
+    bigram_mod = gensim.models.phrases.Phraser(bigram)
+    def make_bigrams(texts):
+        return [bigram_mod[doc] for doc in texts]
+
+
+    bigrams_texts = make_bigrams(list_texts)
+    dictionary_texts = gensim.corpora.Dictionary(bigrams_texts)
     dictionary_texts.save('dictionary_texts.dict')
     
     dictionary_tags = gensim.corpora.Dictionary(list_tags)
     dictionary_tags.save('dictionary_tags.dict')
     
-    corpus_texts = [dictionary_texts.doc2bow(text) for text in list_texts]
+    corpus_texts = [dictionary_texts.doc2bow(text) for text in bigrams_texts]
     corpus_tags = [dictionary_tags.doc2bow(text) for text in list_tags]
     
     
-    model_texts = DynamicTopics.compute_coherence_values(dictionary_texts, corpus_texts, list_texts, 1, 10)
+    model_texts = DynamicTopics.compute_coherence_values(dictionary_texts, corpus_texts, bigrams_texts, 1, 10)
     model_tags = DynamicTopics.compute_coherence_values(dictionary_tags, corpus_tags, list_tags, 1, 10)
-    
+#    
     i = 0
+    count_one = 0
+    count_two = 0
     for mem in memes:
-        mem.cluster_text = num_cluster(list_texts, i, model_texts, corpus_texts)
-        mem.cluster_label = num_cluster(list_tags, i, model_tags, corpus_tags)
-        mem.save()
+        if(list_texts[i] != []):
+            res = num_cluster(list_texts, i, model_texts, corpus_texts)
+            if (res == -1): count_one += 1
+        if(list_tags[i] != []):
+            res = num_cluster(list_tags, i, model_tags, corpus_tags)
+            if (res == -1): count_two += 1
+#        print(i, list_texts[i],  num_cluster(list_texts, i, model_texts, corpus_texts))
+#        print(i, list_tags[i], num_cluster(list_tags, i, model_tags, corpus_tags))
         i+=1
+        
+    print(count_one, count_two)
       
     model_texts.save('model_texts.model')
     model_tags.save('model_tags.model')
 
-
+    vis1 = pyLDAvis.gensim.prepare(model_texts, corpus_texts, dictionary_texts, sort_topics = False)
+    pyLDAvis.save_html(vis1, 'text_model.html')
+    
+    vis2 = pyLDAvis.gensim.prepare(model_tags, corpus_tags, dictionary_tags, sort_topics = False)
+    pyLDAvis.save_html(vis2, 'tag_model.html')
+    
 def num_cluster(data, i, model, corpus):
     topic_keywords=[]
     num_t = model.get_document_topics(corpus[i])

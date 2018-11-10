@@ -19,8 +19,10 @@ def Tokenization(phrase: str):
             else:
                     bit_tok += " "
                     break
-        if bit_tok != "" or bit_tok != " ":
+        if bit_tok != "" and bit_tok != " " and len(bit_tok) > 2:
             data.append(bit_tok.lower().strip())
+            bit_tok = ""
+        else:
             bit_tok = ""
     
     tokens = [i.replace("«", "").replace("»", "") for i in tokens]

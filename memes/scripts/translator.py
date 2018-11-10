@@ -110,6 +110,7 @@ def translate_raw_text(raw_text):
     i = i.replace('/', '')
     i = i.replace('\\', '')
     i = i.replace(',', ' ')
+    i = i.replace(';', ' ')
 
     print(i)
     str_to_translate = i.split(' ')
