@@ -12,7 +12,7 @@ from memes.scripts.recognition import recognite_image_cluster
 def fresh(request):
     cluster = models.Cluster.objects.filter(name = '0', type = 'text')
     memes = models.Meme.objects.filter(cluster_text = cluster)[:10]
-    return render(request, 'memes/posts.html', {'memes': memes})
+    return render(request, 'memes/lenta.html', {'memes': memes})
 
 def upload(request):
     try:
@@ -26,11 +26,11 @@ def upload(request):
 
 def hot(request):
     memes = models.Meme.objects.all()[:1]
-    return render(request, 'memes/posts.html', {'memes': memes})
+    return render(request, 'memes/lenta.html', {'memes': memes})
 
 def relevant(request):
     memes = models.Meme.objects.all()[:2]
-    return render(request, 'memes/posts.html', {'memes': memes})
+    return render(request, 'memes/lenta.html', {'memes': memes})
 
 @csrf_exempt
 def upload_file(request):
@@ -44,3 +44,11 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     return HttpResponse("404")
+
+@csrf_exempt
+def get_more(request):
+    if request.method == 'POST':
+        if request.POST['type'] == 'same':
+            return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
+                                                                                  request.POST['offset'])})
+        return HttpResponse("404")

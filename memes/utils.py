@@ -23,24 +23,24 @@ class Utils:
     def getFresh(time):
         return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time)[:10]
 
-    def getFromClusterText(id, time, count):
+    def getFromClusterText(id, offset, count):
         cl = models.Cluster.objects.filter(name=id).last()
-        return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time, cluster_text=cl)[:count]
+        return models.Meme.objects.order_by('-created_at').filter(cluster_text=cl)[offset:count]
 
-    def getFromClusterLabel(id, time, count):
+    def getFromClusterLabel(id, offset, count):
         cl = models.Cluster.objects.filter(name=id).last()
-        return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time, cluster_label=cl)[:count]
+        return models.Meme.objects.order_by('-created_at').filter(cluster_label=cl)[offset:count]
 
-    def getForFind(filter, time):
+    def getForFind(filter, offset):
         clusters = filter.split(',')
-        fromtext = Utils.getFromClusterText(clusters[0], time, 3)
-        fromlabel = Utils.getFromClusterLabel(clusters[1], time, 7)
+        fromtext = Utils.getFromClusterText(clusters[0], offset, 3)
+        fromlabel = Utils.getFromClusterLabel(clusters[1], offset, 7)
         return list(chain(fromlabel, fromtext))
 
     def getForFindAll(path):
         res = recognite_image_cluster(path)
-        fromtext = Utils.getFromClusterText(res[0], "2099-01-01 00:00:00", 9999)
-        fromlabel = Utils.getFromClusterLabel(res[1], "2099-01-01 00:00:00", 9999)
+        fromtext = Utils.getFromClusterText(res[0], 0, 9999)
+        fromlabel = Utils.getFromClusterLabel(res[1], 0, 9999)
         return list(chain(fromlabel, fromtext))
 
     def handle_uploaded_file(f):
