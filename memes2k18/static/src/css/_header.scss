@@ -34,6 +34,12 @@ header {
         background-color: $menu-back-hover;
         cursor: hand;
       }
+      a {
+        display: block; /* Ссылка как блочный элемент */
+        text-align: center; /* Выравнивание по центру */
+        height: 100%; /* Высота на весь слой */
+        text-decoration: none;
+      }
     }
   }
 

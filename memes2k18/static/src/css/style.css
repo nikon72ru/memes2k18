@@ -13961,6 +13961,15 @@ header .links div:hover {
   background-color: #b4387d;
   cursor: hand;
 }
+header .links div a {
+  display: block;
+  /* Ссылка как блочный элемент */
+  text-align: center;
+  /* Выравнивание по центру */
+  height: 100%;
+  /* Высота на весь слой */
+  text-decoration: none;
+}
 @media screen and (max-width: 768px) {
   header .page {
     margin: 40px 10px;
