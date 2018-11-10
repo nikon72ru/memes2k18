@@ -17,6 +17,8 @@
                 {% for meme in memes %}
                     {% include 'memes/post.html' with meme=meme %}
                 {% endfor %}
+
+                <div><a id="lazyLoadLink" href="javascript:void(0);" data-page="2">Load More Posts</a></div>
             </div>
         </div>
     </div>
@@ -24,4 +26,6 @@
 </section>
 
 </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="{% static '/src/js/lazy.js' %}"></script>
 </html>
