@@ -7,29 +7,37 @@ from itertools import chain
 from memes.scripts.recognition import recognite_image_cluster
 
 class Utils:
-    def getHottest(count):
+    def getHottest(offset):
+        count=10
         firstCount = int(count*0.2)
         secondCount = int(count*0.3)
         counts = [count-firstCount-secondCount, secondCount, firstCount]
         pictures = []
-        clusters = models.Cluster.objects.order_by('-requests').all()[:3]
+        clusters = models.Cluster.objects.filter(type='tag').order_by('-requests').all()[:3]
+        print(clusters)
+        i=0
         for cluster in clusters:
-            pctrs = models.Meme.objects.filter(Q(cluster_text_id=cluster.id) | Q(cluster_label_id=cluster.id))[:counts[1]]
-            for pic in pctrs:
-                pictures.append(pic.image_url)
-
+            print(cluster.id)
+            pctrs = models.Meme.objects.filter(cluster_label_id=cluster.id)[offset:offset+counts[i]]
+            print(pctrs)
+            i += 1
+            pictures = list(chain(pictures, pctrs))
+            print(pictures)
+        #     for pic in pctrs:
+        #         pictures.append(pic.image_url)
+        #
         return pictures
 
-    def getFresh(time):
-        return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time)[:10]
+    def getFresh(offset):
+        return models.Meme.objects.order_by('-created_at')[offset:10]
 
     def getFromClusterText(id, offset, count):
         cl = models.Cluster.objects.filter(name=id).last()
-        return models.Meme.objects.order_by('-created_at').filter(cluster_text=cl)[offset:count]
+        return models.Meme.objects.order_by('-created_at').filter(cluster_text=cl)[int(offset):int(offset)+count]
 
     def getFromClusterLabel(id, offset, count):
         cl = models.Cluster.objects.filter(name=id).last()
-        return models.Meme.objects.order_by('-created_at').filter(cluster_label=cl)[offset:count]
+        return models.Meme.objects.order_by('-created_at').filter(cluster_label=cl)[int(offset):int(offset)+count]
 
     def getForFind(filter, offset):
         clusters = filter.split(',')
