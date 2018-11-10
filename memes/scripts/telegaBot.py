@@ -19,7 +19,7 @@ def get_updates_json(request):
 
 
 def load_image(file_id):
-    path = 'memes2k18/static/users_images/'
+    path = 'static/users_images/'
     result = requests.get(file_path_url + file_id).json()['result']
     r = requests.get(download_url + result['file_path'], allow_redirects=True)
     open(path + result['file_path'].split("/")[-1], 'wb').write(r.content)
@@ -40,7 +40,8 @@ def last_update(data, last_message_id, pathes):
         print('In text')
         chat_id = get_chat_id(results[total_updates])
         # mess_data = recognite_image_no_save(path)
-        print(pathes)
+        if len(pathes) == 0:
+            return results[total_updates], 'NoWay', results[total_updates]['message']['message_id']
         send_image(chat_id, pathes[0])
         pathes[:] = pathes[1:]
         send_mess(chat_id, "")
@@ -58,7 +59,7 @@ def send_mess(chat, text):
     return response
 
 def send_image(chat, file_name):
-    path = 'memes2k18' + file_name
+    path = file_name
     files = {'photo': open(path, 'rb')}
     status = requests.post(send_photo_url + str(chat), files=files)
 
