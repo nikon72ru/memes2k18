@@ -78,4 +78,3 @@ class Meme(models.Model):
     cluster_label = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_label')
 
 
-
