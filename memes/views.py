@@ -13,7 +13,10 @@ def fresh(request):
     return render(request, 'memes/posts.html', {'memes': memes})
 
 def upload(request):
-    return render(request, 'memes/upload.html', {})
+    filter = request.GET.__getitem__('filter')
+    pic_url = request.GET.__getitem__('source')
+    memes = models.Meme.objects.all()[:3]
+    return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
 
 @csrf_exempt
 def upload_file(request):
