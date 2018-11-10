@@ -5,7 +5,7 @@ import memes.scripts.Stopwords as Stopwords
 def Preprocessings_phrase(phrase: str):
     new_phrase = Tokenization.Tokenization(phrase)
     new_phrase = Lemmatization.Lemmatization(new_phrase)
-    new_phrase = Stopwords.Remove_Stopwords(new_phrase, 'memes/scripts/Stop.txt')
+    new_phrase = Stopwords.Remove_Stopwords(new_phrase, 'Stop.txt')
     return new_phrase
 
 def Preprocessings_list_phrase(dataFrame):
