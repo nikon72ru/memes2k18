@@ -32,7 +32,7 @@ def Start():
     
     model_texts = DynamicTopics.compute_coherence_values(dictionary_texts, corpus_texts, bigrams_texts, 1, 10)
     model_tags = DynamicTopics.compute_coherence_values(dictionary_tags, corpus_tags, list_tags, 1, 10)
-#    
+    
     i = 0
     count_one = 0
     count_two = 0
