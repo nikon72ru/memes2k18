@@ -11,4 +11,4 @@ def fresh(request):
     return render(request, 'memes/posts.html', {'memes': memes})
 
 def upload(request):
-    return render(request, 'memes/upload.html', {'memes':{}})
+    return render(request, 'memes/upload.html', {})
