@@ -2,7 +2,6 @@ import re
 
 import requests
 import json
-import pandas as pd
 
 
 check_lang_url = 'https://translate.yandex.net/api/v1.5/tr.json/detect?key=trnsl.1.1.20181109T142619Z.ab3db7ff0f9b9c6a.e38405c416e11e05beac9c020deaf8da7cb9c46a'

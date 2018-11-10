@@ -99,7 +99,7 @@ def recognite_image_no_save(path):
     return raw_text
 
 def recognite_image_cluster(file_name):
-    path = 'memes2k18/static/user_images/' + file_name
+    path = 'static/users_images/' + file_name
     print(path)
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.abspath("api_key.json")
 
