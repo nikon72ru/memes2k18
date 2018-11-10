@@ -28,11 +28,11 @@
                 {% for meme in memes %}
                 {% include 'memes/post.html' with meme=meme %}
                 {% endfor %}
+                {% include 'memes/lazy_load.html' %}
             </div>
             <div class="col-4 sample">
                 {% include 'memes/same.html' with pic_url=pic_url %}
             </div>
-            {% include 'memes/lazy_load.html' %}
         </div>
     </div>
     </div>
