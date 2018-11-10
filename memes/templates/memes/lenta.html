@@ -17,15 +17,7 @@
                 {% for meme in memes %}
                     {% include 'memes/post.html' with meme=meme %}
                 {% endfor %}
-
-                <div class="container">
-                    <div class="row ">
-                        <div id="lazyLoadLink" class="col-12 lazyload text-center align-middle">
-                            Загрузить больше постов
-                        </div>
-                    </div>
-                </div>
-
+                {% include 'memes/lazy_load.html' %}
             </div>
         </div>
     </div>
@@ -33,6 +25,4 @@
 </section>
 
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="{% static '/src/js/lazy.js' %}"></script>
 </html>
