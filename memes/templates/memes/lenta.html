@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Загркзка мемов</title>
+    <title>Мемасы</title>
     <link href="{% static 'src/css/style.css'%}" rel="stylesheet">
 
 </head>
@@ -18,7 +18,14 @@
                     {% include 'memes/post.html' with meme=meme %}
                 {% endfor %}
 
-                <div id="lazyLoadLink" class="lazyload">Load More Posts</div>
+                <div class="container">
+                    <div class="row ">
+                        <div id="lazyLoadLink" class="col-12 lazyload text-center align-middle">
+                            Загрузить больше постов
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
