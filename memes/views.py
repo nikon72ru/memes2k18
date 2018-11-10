@@ -10,8 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from memes.scripts.recognition import recognite_image_cluster
 
 def fresh(request):
-    cluster = models.Cluster.objects.filter(name = '0', type = 'text')
-    memes = models.Meme.objects.filter(cluster_text = cluster)[:10]
+    memes = Utils.getFresh(0)
     return render(request, 'memes/lenta.html', {'memes': memes})
 
 def upload(request):
@@ -25,7 +24,7 @@ def upload(request):
     return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
 
 def hot(request):
-    memes = models.Meme.objects.all()[:1]
+    memes = Utils.getHottest(0)
     return render(request, 'memes/lenta.html', {'memes': memes})
 
 def relevant(request):
@@ -47,8 +46,9 @@ def upload_file(request):
 
 @csrf_exempt
 def get_more(request):
+    print(request.POST['type'])
     if request.method == 'POST':
-        if request.POST['type'] == 'same':
+        if 'upload' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
                                                                                   request.POST['offset'])})
         return HttpResponse("404")
