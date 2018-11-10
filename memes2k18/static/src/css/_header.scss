@@ -1,0 +1,45 @@
+header {
+
+  //vars
+  $color: #dddddd;
+  $header_back: #8d2c62;
+  $href: #dddddd;
+  $href-hover: lighten($href, 20%);
+  $menu-back-hover: lighten($header_back, 10%);
+
+  word-wrap: normal;
+  line-height: normal;
+  font-size: medium;
+  background-color: $header_back;
+  color: $color;
+  z-index: 20;
+
+
+  .site_logo {
+    img {
+      height: 55px;
+    }
+    padding: 15px 0px;
+  }
+
+  .links{
+    @extend .row-flex;
+    div {
+      @extend .vertical-align;
+      padding: 20px 20px;
+      font-size: larger;
+      color: $href;
+      &:hover {
+        color: $href-hover;
+        background-color: $menu-back-hover;
+        cursor: hand;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .page {
+      margin: 40px 10px;
+    }
+  }
+}

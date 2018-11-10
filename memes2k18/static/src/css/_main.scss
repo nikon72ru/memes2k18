@@ -1,0 +1,72 @@
+body {
+
+  $body: #d7d7d7;
+  $post : #ffffff;
+  $post_icons: #8d2c62;
+
+  $theme-back: darken($base, 10%);
+  background-color: $body;
+  color: $text_color;
+  font-family: 'Open Sans', sans-serif;
+  word-wrap: break-word;
+  line-height: 2;
+  font-size: 15px;
+
+  .vertical-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bottom-align {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .row-flex {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .theme {
+    color: $base;
+  }
+
+  .theme-back {
+    background-color: $theme-back;
+  }
+
+  .my-sections
+  {
+    margin-top: 80px;
+  }
+
+  .post{
+    background-color: $post;
+    margin-top: 30px;
+    box-shadow:0 0 2px darken($post,20%);
+    .container {
+      padding: 20px;
+    }
+  }
+
+  .post_img{
+    @extend .fit-image
+  };
+
+  .fit-image{
+    width: 100%;
+    object-fit: cover;
+  }
+  .splitter{
+    padding-top: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $post_icons;
+  }
+  .tags{
+    color: $post_icons;
+    i {
+      padding: 2px 10px;
+    }
+  }
+}
