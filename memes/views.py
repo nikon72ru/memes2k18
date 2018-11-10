@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 def fresh(request):
     memes = models.Meme.objects.all()
-    return render(request, 'memes/post_list.html', {'memes': memes})
+    return render(request, 'memes/posts.html', {'memes': memes})
 
 def upload(request):
     template = loader.get_template('memes/upload.html')
