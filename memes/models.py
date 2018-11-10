@@ -74,7 +74,7 @@ class Meme(models.Model):
         blank=True,
         null=True
     )
-    cluster_text = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_text')
-    cluster_label = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_label')
+    cluster_text = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_text', null=True)
+    cluster_label = models.ForeignKey(Cluster, on_delete=models.DO_NOTHING, related_name='cluster_label', null=True)
 
 
