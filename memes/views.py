@@ -7,7 +7,7 @@ from django.http import HttpResponse
 
 
 def fresh(request):
-    memes = models.Meme.objects.all()
+    memes = models.Meme.objects.all()[:3]
     return render(request, 'memes/posts.html', {'memes': memes})
 
 def upload(request):
