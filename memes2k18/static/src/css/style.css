@@ -14002,6 +14002,20 @@ body .my-sections {
 body .posts .post:nth-child(n+2) {
   margin-top: 20px;
 }
+body .lazyload {
+  background-color: #8d2c62;
+  font-size: x-large;
+  color: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 50px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 10px;
+}
+body .lazyload:hover {
+  cursor: hand;
+}
 body .post {
   background-color: #ffffff;
   border: 1px solid #ccc;

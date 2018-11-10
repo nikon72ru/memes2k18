@@ -7,11 +7,11 @@ from django.core.serializers import json
 from .forms import UploadFileForm
 from memes.utils import Utils
 from django.views.decorators.csrf import csrf_exempt
+from memes.scripts.recognition import recognite_image_cluster
 
 def fresh(request):
-    cluster = models.Cluster.objects.filter(name = '0', type = 'text')
-    memes = models.Meme.objects.filter(cluster_text = cluster)[:10]
-    return render(request, 'memes/posts.html', {'memes': memes})
+    memes = Utils.getFresh(0)
+    return render(request, 'memes/lenta.html', {'memes': memes})
 
 def upload(request):
     try:
@@ -24,12 +24,12 @@ def upload(request):
     return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
 
 def hot(request):
-    memes = models.Meme.objects.all()[:1]
-    return render(request, 'memes/posts.html', {'memes': memes})
+    memes = Utils.getHottest(0)
+    return render(request, 'memes/lenta.html', {'memes': memes})
 
 def relevant(request):
     memes = models.Meme.objects.all()[:2]
-    return render(request, 'memes/posts.html', {'memes': memes})
+    return render(request, 'memes/lenta.html', {'memes': memes})
 
 @csrf_exempt
 def upload_file(request):
@@ -38,7 +38,17 @@ def upload_file(request):
         print(request)
         if True:
             Utils.handle_uploaded_file(request.FILES['image'])
-            return HttpResponse('?filter=""&source='+request.FILES['image'].name)
+            res = recognite_image_cluster(request.FILES['image'].name)
+            return HttpResponse('?filter='+str(res[0])+','+str(res[1])+'&source='+request.FILES['image'].name)
     else:
         form = UploadFileForm()
     return HttpResponse("404")
+
+@csrf_exempt
+def get_more(request):
+    print(request.POST['type'])
+    if request.method == 'POST':
+        if 'upload' in request.POST['type']:
+            return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
+                                                                                  request.POST['offset'])})
+        return HttpResponse("404")

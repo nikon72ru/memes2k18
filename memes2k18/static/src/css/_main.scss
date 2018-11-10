@@ -48,6 +48,22 @@ body {
       margin-top: 20px;
     }
   }
+
+  .lazyload {
+    background-color: $post_icons;
+    font-size: x-large;
+    color: $post;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 50px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 10px;
+    &:hover {
+      cursor: hand;
+    }
+  }
+
   .post{
     background-color: $post;
     border: 1px solid #ccc;
