@@ -1,0 +1,25 @@
+{% load staticfiles %}
+{% block content %}
+<div class="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <img class="post_img" src="{% static 'img/153381484913918898.jpg' %}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 splitter"></div>
+        </div>
+        <div class="row">
+            <div class="tags col-8 text-left">
+                <i class="far fa-heart fa-2x"></i>
+                <i class="far fa-comment fa-2x"></i>
+                <i class="fas fa-reply fa-2x"></i>
+            </div>
+            <div class="tags col-4 text-right">
+                <i class="fa fa-eye fa-2x"></i>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
