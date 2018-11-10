@@ -111,7 +111,7 @@ def translate_raw_text(raw_text):
     i = i.replace(',', ' ')
     i = i.replace(';', ' ')
 
-    print(i)
+    #print(i)
     str_to_translate = i.split(' ')
     str_to_translate = [value for value in str_to_translate if value != '']
     # str_to_translate.remove('')
