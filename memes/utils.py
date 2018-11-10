@@ -3,6 +3,7 @@ from random import randint
 
 from memes import models
 from django.db.models import Q
+from itertools import chain
 
 class Utils:
     def getHottest(count):
@@ -17,6 +18,24 @@ class Utils:
                 pictures.append(pic.image_url)
 
         return pictures
+
+    def getFresh(time):
+        return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time)[:10]
+
+    def getFromClusterText(id, time, count):
+        cl = models.Cluster.objects.get(id=id)
+        return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time, cluster_text=cl)[:count]
+
+    def getFromClusterLabel(id, time, count):
+        cl = models.Cluster.objects.get(id=id)
+        return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time, cluster_label=cl)[:count]
+
+    def getForFind(filter, time):
+        clusters = filter.split(',')
+        fromtext = Utils.getFromClusterText(clusters[0], time, 3)
+        fromlabel = Utils.getFromClusterLabel(clusters[1], time, 7)
+        return list(chain(fromlabel, fromtext))
+
 
     def handle_uploaded_file(f):
         if not os.path.exists(os.path.dirname('static/users_images/'+f.name)):

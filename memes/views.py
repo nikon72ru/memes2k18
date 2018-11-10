@@ -7,6 +7,7 @@ from django.core.serializers import json
 from .forms import UploadFileForm
 from memes.utils import Utils
 from django.views.decorators.csrf import csrf_exempt
+from memes.scripts.recognition import recognite_image_cluster
 
 def fresh(request):
     memes = models.Meme.objects.all()[:3]
@@ -29,7 +30,8 @@ def upload_file(request):
         print(request)
         if True:
             Utils.handle_uploaded_file(request.FILES['image'])
-            return HttpResponse('?filter=""&source='+request.FILES['image'].name)
+            res = recognite_image_cluster(request.FILES['image'].name)
+            return HttpResponse('?filter='+str(res[0])+','+str(res[1])+'&source='+request.FILES['image'].name)
     else:
         form = UploadFileForm()
     return HttpResponse("404")
