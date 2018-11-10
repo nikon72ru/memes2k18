@@ -4,6 +4,7 @@ from random import randint
 from memes import models
 from django.db.models import Q
 from itertools import chain
+from memes.scripts.recognition import recognite_image_cluster
 
 class Utils:
     def getHottest(count):
@@ -23,11 +24,11 @@ class Utils:
         return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time)[:10]
 
     def getFromClusterText(id, time, count):
-        cl = models.Cluster.objects.get(id=id)
+        cl = models.Cluster.objects.filter(name=id).last()
         return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time, cluster_text=cl)[:count]
 
     def getFromClusterLabel(id, time, count):
-        cl = models.Cluster.objects.get(id=id)
+        cl = models.Cluster.objects.filter(name=id).last()
         return models.Meme.objects.order_by('-created_at').filter(created_at__lte=time, cluster_label=cl)[:count]
 
     def getForFind(filter, time):
@@ -36,6 +37,11 @@ class Utils:
         fromlabel = Utils.getFromClusterLabel(clusters[1], time, 7)
         return list(chain(fromlabel, fromtext))
 
+    def getForFindAll(path):
+        res = recognite_image_cluster(path)
+        fromtext = Utils.getFromClusterText(res[0], "2099-01-01 00:00:00", 9999)
+        fromlabel = Utils.getFromClusterLabel(res[1], "2099-01-01 00:00:00", 9999)
+        return list(chain(fromlabel, fromtext))
 
     def handle_uploaded_file(f):
         if not os.path.exists(os.path.dirname('static/users_images/'+f.name)):
