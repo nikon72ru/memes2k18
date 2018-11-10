@@ -13962,13 +13962,12 @@ header .links div:hover {
   cursor: hand;
 }
 header .links div a {
-  display: block;
-  /* Ссылка как блочный элемент */
   text-align: center;
   /* Выравнивание по центру */
   height: 100%;
   /* Высота на весь слой */
   text-decoration: none;
+  color: #dddddd;
 }
 @media screen and (max-width: 768px) {
   header .page {
