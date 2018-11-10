@@ -13998,13 +13998,18 @@ body .theme-back {
 body .my-sections {
   margin-top: 80px;
 }
+body .posts .post:nth-child(2) {
+  margin-top: 20px;
+}
 body .post {
   background-color: #ffffff;
-  margin-top: 30px;
-  box-shadow: 0 0 2px #cccccc;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 body .post .container {
-  padding: 20px;
+  padding: 20px 20px 5px;
 }
 body .fit-image, body .post_img {
   width: 100%;
@@ -14020,6 +14025,38 @@ body .tags {
 }
 body .tags i {
   padding: 2px 10px;
+}
+body .same {
+  margin-top: 0px;
+}
+
+#dropZone {
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+  padding: 50px 0;
+  margin: 30px auto;
+  margin-bottom: 0px;
+  background: #eee;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#dropZone.hover {
+  background: #ddd;
+  border-color: #aaa;
+}
+
+#dropZone.error {
+  background: #faa;
+  border-color: #f00;
+}
+
+#dropZone.drop {
+  background: #afa;
+  border-color: #0f0;
 }
 
 /*# sourceMappingURL=style.css.map */
