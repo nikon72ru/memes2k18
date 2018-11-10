@@ -15,7 +15,7 @@ def fresh(request):
 def upload(request):
     try:
         filter = request.GET.__getitem__('filter')
-        pic_url = request.GET.__getitem__('source')
+        pic_url = 'users_images/' + request.GET.__getitem__('source')
     except Exception as ex:
         filter = ''
         pic_url = ''
