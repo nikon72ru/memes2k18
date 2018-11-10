@@ -5,8 +5,14 @@ from django.template import loader
 from django.http import HttpResponse
 
 
-def index(request):
+def fresh(request):
     template = loader.get_template('memes/posts.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))
+
+def upload(request):
+    template = loader.get_template('memes/upload.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
