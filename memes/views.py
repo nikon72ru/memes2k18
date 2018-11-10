@@ -13,7 +13,14 @@ def fresh(request):
     return render(request, 'memes/posts.html', {'memes': memes})
 
 def upload(request):
-    return render(request, 'memes/upload.html', {})
+    try:
+        filter = request.GET.__getitem__('filter')
+        pic_url = 'users_images/' + request.GET.__getitem__('source')
+    except Exception as ex:
+        filter = ''
+        pic_url = ''
+    memes = models.Meme.objects.all()[:3]
+    return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
 
 @csrf_exempt
 def upload_file(request):
