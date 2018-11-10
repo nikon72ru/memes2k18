@@ -1,6 +1,6 @@
+import memes.scripts.Preprocessings as Preprocessings
 import gensim
 from memes import models
-
 
 def getTopicForQuery(text, model, dictionary):
     topic_keywords = []
@@ -19,27 +19,20 @@ def getTopicForQuery(text, model, dictionary):
     else:
         return -1
 
-def Similar(text, tags):
-    text = text.split(',')
-    tags = tags.split(',')
+def textSearch(text):
+    text = Preprocessings.Preprocessings_phrase(text)
     
-    model_text = gensim.models.ldamodel.LdaModel.load('model_texts.model')
-    model_tags = gensim.models.ldamodel.LdaModel.load('model_tags.model')
-    
+    model_text = gensim.models.ldamodel.LdaModel.load('model_texts.model')    
     
     dictionary_texts = gensim.corpora.Dictionary.load('dictionary_texts.dict')
-    dictionary_tags = gensim.corpora.Dictionary.load('dictionary_tags.dict')
     
-    topic_text = getTopicForQuery(text, model_text, dictionary_texts)
-    
-    topic_tags = getTopicForQuery(tags, model_tags, dictionary_tags)
-    
-    requests_cluster = models.Cluster.objects.get(name=topic_text, type = 'text')
+    topic_cluster = getTopicForQuery(text, model_text, dictionary_texts)    
+    requests_cluster = models.Cluster.objects.get(name=topic_cluster, type = 'text')
     requests_cluster.requests += 1
     requests_cluster.save()
     
-    requests_cluster = models.Cluster.objects.get(name=topic_tags, type = 'tag')
-    requests_cluster.requests += 1
-    requests_cluster.save()
+    return topic_cluster
+
     
-    return (topic_text, topic_tags)
+    
+    
