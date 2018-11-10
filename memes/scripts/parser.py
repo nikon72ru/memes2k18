@@ -7,7 +7,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-def load_images(path):
+def load_images():
+    path = '../../memes2k18/static/img/'
     browser = webdriver.Chrome()
 
     browser.get("https://pikabu.ru/tag/мемы")
@@ -34,9 +35,8 @@ def load_images(path):
                     r = requests.get(url_of_img, allow_redirects=True)
                     open(path + url_of_img.split("/")[-1], 'wb').write(r.content)
                     all_memes[post] = a
-                    f = open('result.csv', 'a').write('img/' + url_of_img.split("/")[-1] + '\t' + str(a['tags']) + '\n')
+                    #f = open('result.csv', 'a').write('img/' + url_of_img.split("/")[-1] + '\t' + str(a['tags']) + '\n')
                 except: print('mistake')
         no_of_pagedowns -= 1
 
     post_elems = browser.find_elements_by_class_name("story")
-
