@@ -1,31 +1,3 @@
-{% load staticfiles %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Загркзка мемов</title>
-    <link href="{% static 'src/css/style.css'%}" rel="stylesheet">
-
-</head>
-<body>
-
-{% include 'memes/header.html' %}
-
-<section class="main content">
-    <div class="container">
-        <div class="row ">
-            <div class="offset-2 col-8 posts">
-                {% for meme in memes %}
-                    {% include 'memes/post.html' with meme=meme %}
-                {% endfor %}
-
-                <div id="lazyLoadLink">Load More Posts</div>
-            </div>
-        </div>
-    </div>
-    </div>
-</section>
-
-</body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="{% static '/src/js/lazy.js' %}"></script>
-</html>
+{% for meme in memes %}
+{% include 'memes/post.html' with meme=meme %}
+{% endfor %}
