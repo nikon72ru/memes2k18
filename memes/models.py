@@ -16,6 +16,11 @@ class Cluster(models.Model):
     requests = models.IntegerField(
         verbose_name='Количество запросов за последние 24 часа',
     )
+    type = models.CharField(
+        verbose_name = 'type',
+        max_length=2048,
+        null=True
+    )
 
 
 class Keywords(models.Model):
