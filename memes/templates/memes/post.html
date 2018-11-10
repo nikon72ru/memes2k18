@@ -1,11 +1,10 @@
 {% load staticfiles %}
-{% load clear %}
 {% block content %}
 <div class="post">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <img class="post_img" src="{{meme.image_url|clear}}">
+                <img class="post_img" src="{{meme.image_url.clear}}">
             </div>
         </div>
         <div class="row">

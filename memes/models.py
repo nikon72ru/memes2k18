@@ -4,6 +4,10 @@ from django.utils import timezone
 
 # Create your models here.
 
+@property
+def clear(self):
+    return self.replace('memes2k18','')
+
 class Cluster(models.Model):
     created_at = models.DateTimeField(
         verbose_name='Создано',
