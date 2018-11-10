@@ -13999,7 +13999,7 @@ body .theme-back {
 body .my-sections {
   margin-top: 80px;
 }
-body .posts .post:nth-child(2) {
+body .posts .post:nth-child(n+2) {
   margin-top: 20px;
 }
 body .post {
@@ -14010,7 +14010,7 @@ body .post {
   border-radius: 5px;
 }
 body .post .container {
-  padding: 20px 20px 5px;
+  padding: 20px 20px 10px;
 }
 body .fit-image, body .post_img {
   width: 100%;
