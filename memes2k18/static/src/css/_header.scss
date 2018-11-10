@@ -14,7 +14,6 @@ header {
   color: $color;
   z-index: 20;
 
-
   .site_logo {
     img {
       height: 55px;
@@ -22,10 +21,11 @@ header {
     padding: 15px 0px;
   }
 
-  .links{
+  .links {
     @extend .row-flex;
-    div {
+    a {
       @extend .vertical-align;
+      text-decoration: none;
       padding: 20px 20px;
       font-size: larger;
       color: $href;
@@ -34,13 +34,8 @@ header {
         background-color: $menu-back-hover;
         cursor: hand;
       }
-      a {
-        text-align: center; /* Выравнивание по центру */
-        height: 100%; /* Высота на весь слой */
-        text-decoration: none;
-        color: $href;
-      }
     }
+
   }
 
   @media screen and (max-width: 768px) {
@@ -48,4 +43,5 @@ header {
       margin: 40px 10px;
     }
   }
+
 }
