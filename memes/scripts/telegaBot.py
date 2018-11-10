@@ -59,7 +59,7 @@ def send_mess(chat, text):
     return response
 
 def send_image(chat, file_name):
-    path = file_name.replace('/', '')
+    path = file_name.replace('/', '', 1)
     files = {'photo': open(path, 'rb')}
     status = requests.post(send_photo_url + str(chat), files=files)
 
