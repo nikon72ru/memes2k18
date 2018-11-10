@@ -37,12 +37,26 @@ $(document).ready(function() {
         }
         
         // Создаем запрос
-        var xhr = new XMLHttpRequest();
-        xhr.upload.addEventListener('progress', uploadProgress, false);
-        xhr.onreadystatechange = stateChange;
-        xhr.open('POST', '../upload.php');
-        xhr.setRequestHeader('X-FILE-NAME', file.name);
-        xhr.send(file);
+//        var xhr = new XMLHttpRequest();
+//        xhr.upload.addEventListener('progress', uploadProgress, false);
+//        xhr.onreadystatechange = stateChange;
+//        xhr.open('POST', 'upload_file');
+//        xhr.setRequestHeader('X-FILE-NAME', file.name);
+//        xhr.send(file);
+        formdata = new FormData();
+                if (formdata) {
+                    formdata.append("image", file);
+                    jQuery.ajax({
+                        url: "upload_file",
+                        type: "POST",
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success:function(r){
+                            window.location.href = "upload" + r;
+                        }
+                    });
+                }
     };
     
     // Показываем процент загрузки
@@ -59,7 +73,6 @@ $(document).ready(function() {
             } else {
                 dropZone.text('Произошла ошибка!');
                 dropZone.addClass('error');
-                dropZone.
             }
             dropZone.removeClass('drop');
         }

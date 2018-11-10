@@ -1,10 +1,11 @@
 {% load staticfiles %}
 {% block content %}
-<form action="../upload.php">
+<form action="/upload_file">
     <div id="dropZone">
         Для загрузки, перетащите файл сюда.
     </div>
 </form>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script src="{% static '/src/js/script.js' %}"></script>
 {% endblock %}

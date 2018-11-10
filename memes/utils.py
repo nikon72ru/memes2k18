@@ -1,3 +1,6 @@
+import os
+from random import randint
+
 from memes import models
 from django.db.models import Q
 
@@ -15,3 +18,13 @@ class Utils:
 
         return pictures
 
+    def handle_uploaded_file(f):
+        if not os.path.exists(os.path.dirname('static/users_images/'+f.name)):
+            try:
+                os.makedirs(os.path.dirname('static/users_images/'+f.name))
+            except OSError as exc:  # Guard against race condition
+                    raise
+
+        with open('static/users_images/'+f.name, 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
