@@ -1,2 +1,5 @@
 #!/bin/bash
+rm -r static
+git pull origin master
+cp -r memes2k18/static .
 python3.6 manage.py runserver 95.213.28.134:80

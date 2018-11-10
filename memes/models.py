@@ -46,31 +46,31 @@ class Meme(models.Model):
     )
     raw_text = models.CharField(
         verbose_name='Текст',
-        max_length=2048,
+        max_length=16348,
         blank=True,
         null=True
     )
     ru_text = models.CharField(
         verbose_name='Русский текст',
-        max_length=2048,
+        max_length=16438,
         blank=True,
         null=True
     )
     en_text = models.CharField(
         verbose_name='Английский текст',
-        max_length=2048,
+        max_length=16348,
         blank=True,
         null=True
     )
     lem_text = models.CharField(
         verbose_name='Лемматизированный текст',
-        max_length=2048,
+        max_length=16348,
         blank=True,
         null=True
     )
     labels = models.CharField(
         verbose_name='Сущности на фото',
-        max_length=2048,
+        max_length=16384,
         blank=True,
         null=True
     )
