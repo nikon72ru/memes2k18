@@ -81,3 +81,62 @@ def translate_dataframe(df):
 
 #    print(df.to_csv('resultNew.csv'))
     return df
+
+
+def translate_raw_text(raw_text):
+    i = raw_text
+    i = i.replace('[', '')
+    i = i.replace(']', '')
+    i = i.replace("'", '')
+    i = i.replace('.', '')
+    i = i.replace('#', '')
+    i = i.replace('"', '')
+    i = i.replace('?', '')
+    i = i.replace('!', '')
+    i = i.replace('@', '')
+    i = i.replace('(', '')
+    i = i.replace(')', '')
+    i = i.replace('-', '')
+    i = i.replace('_', '')
+    i = i.replace(':', '')
+    i = i.replace('+', '')
+    i = i.replace('-', '')
+    i = i.replace('--', '')
+    i = i.replace('=', '')
+    i = i.replace('*', '')
+    i = i.replace('&', '')
+    i = i.replace('|', '')
+    i = i.replace('%', '')
+    i = i.replace('/', '')
+    i = i.replace('\\', '')
+    i = i.replace(',', ' ')
+
+    print(i)
+    str_to_translate = i.split(' ')
+    str_to_translate = [value for value in str_to_translate if value != '']
+    # str_to_translate.remove('')
+    for word in str_to_translate:
+        lang = check_lang(str(word))
+        if lang == 'ru':
+            continue
+        elif lang == 'en':
+            translate = translate_word(str(word))
+            if check_lang(translate) == 'en':
+                # i = i.replace(str(word), '')
+                i = re.sub(r"\b%s\b" % str(word),'',i)
+            else:
+                prog = re.compile('[A_Za-z]')
+                if bool(prog.match(str(translate))):
+                # i = i.replace(str(word), '')
+                    i = re.sub(r"\b%s\b" % str(word), '', i)
+                else:
+                # i = i.replace(str(word), str(translate))
+                    i = re.sub(r"\b%s\b" % str(word), str(translate), i)
+        else:
+        # i = i.replace(str(word), '')
+            i = re.sub(r"\b%s\b" % str(word), '', i)
+        i = i.replace('[', '').replace(']', '')
+        i = i.replace("'", '')
+        i = i.replace('"', '')
+
+    return i.replace(',', ' ')
