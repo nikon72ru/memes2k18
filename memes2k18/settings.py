@@ -25,7 +25,7 @@ SECRET_KEY = '91gnt0nrazu2r=&klt0oc^nld=g$7m1ss(t3v42+1ruufr=a32'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['95.213.28.134']
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'memes2k18.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'memes2k18',
+        'NAME': 'memes2k18_2',
         'USER': 'admin',
         'PASSWORD': 'letmein',
         'HOST': '95.213.28.134',
@@ -125,4 +125,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/memes2k18/static/'
+STATIC_URL = '/static/'
