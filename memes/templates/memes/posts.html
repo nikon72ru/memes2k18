@@ -14,9 +14,9 @@
     <div class="container">
         <div class="row ">
             <div class="offset-2 col-8 posts">
-                {% include 'memes/post.html' %}
-                {% include 'memes/post.html' %}
-                {% include 'memes/post.html' %}
+                {% for meme in memes %}
+                    {% include 'memes/post.html' with meme=meme %}
+                {% endfor %}
             </div>
         </div>
     </div>

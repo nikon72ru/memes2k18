@@ -13951,23 +13951,16 @@ header .site_logo {
 header .site_logo img {
   height: 55px;
 }
-header .links div {
+header .links a {
+  text-decoration: none;
   padding: 20px 20px;
   font-size: larger;
   color: #dddddd;
 }
-header .links div:hover {
+header .links a:hover {
   color: white;
   background-color: #b4387d;
   cursor: hand;
-}
-header .links div a {
-  text-align: center;
-  /* Выравнивание по центру */
-  height: 100%;
-  /* Высота на весь слой */
-  text-decoration: none;
-  color: #dddddd;
 }
 @media screen and (max-width: 768px) {
   header .page {
@@ -13983,7 +13976,7 @@ body {
   line-height: 2;
   font-size: 15px;
 }
-body .vertical-align, body header .links div, header .links body div {
+body .vertical-align, body header .links a, header .links body a {
   display: flex;
   align-items: center;
   justify-content: center;
