@@ -20,21 +20,22 @@
     </div>
 </section>
 
+{% if memes != null %}
 <section class="same">
     <div class="container">
         <div class="row">
             <div class="col-8 posts">
-                {% include 'memes/post.html' %}
-                {% include 'memes/post.html' %}
-                {% include 'memes/post.html' %}
+                {% for meme in memes %}
+                {% include 'memes/post.html' with meme=meme %}
+                {% endfor %}
             </div>
             <div class="col-4 sample">
-                {% include 'memes/post.html' %}
+                {% include 'memes/same.html' with pic_url=pic_url %}
             </div>
         </div>
     </div>
     </div>
 </section>
-
+{% endif %}
 </body>
 </html>

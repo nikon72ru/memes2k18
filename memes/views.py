@@ -11,7 +11,4 @@ def fresh(request):
     return render(request, 'memes/posts.html', {'memes': memes})
 
 def upload(request):
-    template = loader.get_template('memes/upload.html')
-    context = {
-    }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'memes/posts.html', {})
