@@ -44,3 +44,11 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     return HttpResponse("404")
+
+@csrf_exempt
+def get_more(request):
+    if request.method == 'POST':
+        if request.POST['type'] == 'same':
+            return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
+                                                                                  request.POST['offset'])})
+        return HttpResponse("404")
