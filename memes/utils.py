@@ -29,7 +29,7 @@ class Utils:
         return pictures
 
     def getFresh(offset):
-        return models.Meme.objects.order_by('-created_at')[offset:10]
+        return models.Meme.objects.order_by('-created_at')[int(offset):int(offset)+10]
 
     def getFromClusterText(id, offset, count):
         cl = models.Cluster.objects.filter(name=id).last()

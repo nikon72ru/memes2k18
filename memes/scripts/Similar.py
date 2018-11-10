@@ -49,11 +49,11 @@ def Similar(text, tags):
     
     topic_tags = getTopicForQuery(tags, model_tags, dictionary_tags)
     
-    requests_cluster = models.Cluster.objects.get(name=topic_text, type = 'text')
+    requests_cluster = models.Cluster.objects.filter(name=topic_text, type = 'text').last()
     requests_cluster.requests += 1
     requests_cluster.save()
     
-    requests_cluster = models.Cluster.objects.get(name=topic_tags, type = 'tag')
+    requests_cluster = models.Cluster.objects.filter(name=topic_tags, type = 'tag').last()
     requests_cluster.requests += 1
     requests_cluster.save()
     

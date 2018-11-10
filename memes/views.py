@@ -46,9 +46,12 @@ def upload_file(request):
 
 @csrf_exempt
 def get_more(request):
-    print(request.POST['type'])
+    print(request.POST)
     if request.method == 'POST':
         if 'upload' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
                                                                                   request.POST['offset'])})
+        elif 'fresh' in request.POST['type']:
+            return render(request, 'memes/posts.html', {'memes': Utils.getFresh(request.POST['offset'])})
+
         return HttpResponse("404")
