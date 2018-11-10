@@ -100,7 +100,7 @@ def recognite_image_no_save(path):
     return raw_text
 
 def recognite_image_cluster(file_name):
-    path = '../../memes2k18/static/user_images/' + file_name
+    path = 'memes2k18/static/user_images/' + file_name
     print(path)
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.abspath("api_key.json")
 
@@ -140,8 +140,8 @@ def recognite_image_cluster(file_name):
 
     raw_text = Preprocessings_phrase(str(raw_text).replace('[','').replace(']','').replace("'",'').replace(',', ' '))
     result = Similar(str(raw_text).replace('[','').replace(']','').replace("'",''), str(raw_labels).replace('[','').replace(']','').replace("'",''))
-
+    
     return result
 
-recognite_image_cluster('file_0.jpg')
+#recognite_image_cluster('15350881881447498.jpg')
 

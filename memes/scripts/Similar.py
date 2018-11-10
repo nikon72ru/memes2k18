@@ -4,7 +4,9 @@ def getTopicForQuery(text, model, dictionary):
 
     ques_vec = dictionary.doc2bow(text)
     topic_vec = model[ques_vec]
-    return topic_vec[0][0][0]
+    topic_vec = topic_vec[0]
+    topic_vec.sort(key = lambda x: x[1], reverse = True)
+    return topic_vec[0][0]
 
 def Similar(text, tags):
     text = text.split(',')
