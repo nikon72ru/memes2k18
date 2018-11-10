@@ -13,6 +13,10 @@ class Cluster(models.Model):
         verbose_name='Название',
         max_length=2048
     )
+    requests = models.IntegerField(
+        verbose_name='Количество запросов за последние 24 часа',
+    )
+
 
 class Keywords(models.Model):
     created_at = models.DateTimeField(
@@ -29,6 +33,7 @@ class Keywords(models.Model):
         verbose_name='Вес',
         null=True
     )
+
 
 class Meme(models.Model):
     created_at = models.DateTimeField(
