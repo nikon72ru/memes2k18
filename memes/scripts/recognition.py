@@ -1,7 +1,6 @@
 import io
 import os
 
-import pandas as pd
 
 # Imports the Google Cloud client library
 from google.cloud import vision

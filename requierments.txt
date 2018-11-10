@@ -7,5 +7,7 @@ django-filter==1.1.0
 django-js-asset==1.1.0
 django-preferences==0.2
 urllib3==1.23
-psycopg2==2.7.4
 psycopg2-binary==2.7.4
+google-cloud-vision
+nltk
+gensim
