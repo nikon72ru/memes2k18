@@ -1,12 +1,17 @@
+import time
+
 import requests
 import os
 from memes.utils import Utils
 from memes.scripts.TextSearch import textSearch
 
-connect_url = 'https://api.telegram.org/bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/'
-download_url = 'https://api.telegram.org/file/bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/'
-file_path_url = 'https://api.telegram.org/bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/getFile?file_id='
-send_photo_url = "https://api.telegram.org/bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/sendPhoto?chat_id="
+#token = 'bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/'
+token = 'bot727144227:AAFnLFELymt-RxcdNw2WXU8cu9Rvsh_L3SE/'
+
+connect_url = 'https://api.telegram.org/' + token
+download_url = 'https://api.telegram.org/file/' + token
+file_path_url = 'https://api.telegram.org/' + token + 'getFile?file_id='
+send_photo_url = "https://api.telegram.org/" + token + "sendPhoto?chat_id="
 
 import json
 
@@ -29,8 +34,11 @@ def load_image(file_id):
 
 def last_update(data, last_message_id, pathes):
     results = data['result']
+    #print(results)
     total_updates = len(results) - 1
     if results[total_updates]['message']['message_id'] == last_message_id:
+        print("Old Message")
+        print(last_message_id)
         return results[total_updates], 'NoWay', last_message_id
     path = 'file_0.jpg'
     if 'photo' in results[total_updates]['message']:
@@ -39,10 +47,10 @@ def last_update(data, last_message_id, pathes):
         path = load_image(results[total_updates]['message']['photo'][n-1]['file_id'])
     if 'text' in results[total_updates]['message'] and results[total_updates]['message']['text'] == 'Ещё':
         print('In More')
-        print(pathes)
         chat_id = get_chat_id(results[total_updates])
         # mess_data = recognite_image_no_save(path)
         if len(pathes) == 0:
+            print('Empty pathes')
             return results[total_updates], 'NoWay', results[total_updates]['message']['message_id']
         send_image(chat_id, pathes[0])
         pathes[:] = pathes[1:]
@@ -110,4 +118,6 @@ def runBot():
             send_image(chat_id, pathes_to_push[0])
             pathes_to_push = pathes_to_push[1:]
             send_mess(chat_id, "")
+
+        time.sleep(5)
 
