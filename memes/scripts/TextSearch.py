@@ -42,7 +42,7 @@ def textSearch(text):
     dictionary_texts = gensim.corpora.Dictionary.load('dictionary_texts.dict')
     
     topic_cluster = getTopicForQuery(text, model_text, dictionary_texts)    
-    requests_cluster = models.Cluster.objects.get(name=topic_cluster, type = 'text')
+    requests_cluster = models.Cluster.objects.filter(name=topic_cluster, type = 'text').last()
     requests_cluster.requests += 1
     requests_cluster.save()
     

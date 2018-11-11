@@ -21,7 +21,17 @@ class Cluster(models.Model):
         max_length=2048,
         null=True
     )
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=2048,
+        null = True
+    )
 
+    description = models.CharField(
+        verbose_name='Описание',
+        max_length=4096,
+        null = True
+    )
 
 class Keywords(models.Model):
     created_at = models.DateTimeField(

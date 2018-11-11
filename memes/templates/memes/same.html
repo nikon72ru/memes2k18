@@ -1,15 +1,41 @@
 {% load staticfiles %}
 {% block content %}
-<div class="post">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h5>Самый лучший мем на свете:</h5>
+<div clas="same">
+    <div class="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3>Ваш потенциальный мем:</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <img class="post_img" src="{% static pic_url %}">
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <img class="post_img" src="{% static pic_url %}">
+    </div>
+    <div class="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3> Судя по изображению это: </h3>
+                    <p>
+                    <h5>#Комиксы #Игры #Человек #Дом</h5>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3> Судя по тексту на меме это: </h3>
+                    <p>
+                    <h5>#Комиксы #Игры #Человек #Дом</h5>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

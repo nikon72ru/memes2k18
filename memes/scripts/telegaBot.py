@@ -1,6 +1,7 @@
 import requests
 import os
 from memes.utils import Utils
+from memes.scripts.TextSearch import textSearch
 
 connect_url = 'https://api.telegram.org/bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/'
 download_url = 'https://api.telegram.org/file/bot690557750:AAHL9Ns7z4m7w5wegK2Ke2KXCq54tGy5Uno/'
@@ -37,7 +38,8 @@ def last_update(data, last_message_id, pathes):
         n = len(results[total_updates]['message']['photo'])
         path = load_image(results[total_updates]['message']['photo'][n-1]['file_id'])
     if 'text' in results[total_updates]['message'] and results[total_updates]['message']['text'] == 'Ещё':
-        print('In text')
+        print('In More')
+        print(pathes)
         chat_id = get_chat_id(results[total_updates])
         # mess_data = recognite_image_no_save(path)
         if len(pathes) == 0:
@@ -46,6 +48,16 @@ def last_update(data, last_message_id, pathes):
         pathes[:] = pathes[1:]
         send_mess(chat_id, "")
         return results[total_updates], 'NoWay', results[total_updates]['message']['message_id']
+    if 'text' in results[total_updates]['message']:
+        print('In Text')
+        id = textSearch(results[total_updates]['message']['text'])
+        pathes[:] = get_image_similars_text(id)
+        chat_id = get_chat_id(results[total_updates])
+        send_image(chat_id, pathes[0])
+        pathes[:] = pathes[1:]
+        send_mess(chat_id, "")
+        return results[total_updates], 'NoWay', results[total_updates]['message']['message_id']
+
 
     return results[total_updates], path, results[total_updates]['message']['message_id']
 
@@ -68,8 +80,13 @@ def get_image_similars(path):
     pathes = [i.image_url for i in res]
     return pathes
 
+def get_image_similars_text(id):
+    res = Utils.getFromClusterText(id, 0, 9999)
+    pathes = [i.image_url for i in res]
+    return pathes
+
 # proxy = 'http://<user>:<pass>@<proxy>:<port>'
-# proxy = 'http://193.160.226.89:53186'
+#proxy = 'http://193.160.226.89:53186'
 proxy = 'http://158.181.19.142:57461'
 
 

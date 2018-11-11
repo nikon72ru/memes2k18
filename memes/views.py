@@ -20,7 +20,7 @@ def upload(request):
     except Exception as ex:
         filter = ''
         pic_url = ''
-    memes = models.Meme.objects.all()[:3]
+    memes = models.Meme.objects.order_by('?')[:10]
     return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
 
 def hot(request):
@@ -46,9 +46,12 @@ def upload_file(request):
 
 @csrf_exempt
 def get_more(request):
-    print(request.POST['type'])
+    print(request.POST)
     if request.method == 'POST':
         if 'upload' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
                                                                                   request.POST['offset'])})
+        elif 'fresh' in request.POST['type']:
+            return render(request, 'memes/posts.html', {'memes': Utils.getFresh(request.POST['offset'])})
+
         return HttpResponse("404")
