@@ -17,7 +17,7 @@ class Utils:
         i=0
         for cluster in clusters:
             print(cluster.id)
-            pctrs = models.Meme.objects.filter(cluster_label_id=cluster.id)[offset:offset+counts[i]]
+            pctrs = models.Meme.objects.filter(cluster_label_id=cluster.id)[int(offset):int(offset)+counts[i]]
             print(pctrs)
             i += 1
             pictures = list(chain(pictures, pctrs))
