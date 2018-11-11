@@ -8,9 +8,10 @@
 $base: darken(#FF9E00,10%);
 $text_color: #000000;
 
-@import "sticky.scss";
-@import "header.scss";
-@import "main.scss";
-@import "footer.scss";
+@import "sticky";
+@import "header";
+@import "main";
+@import "footer";
 @import "drag_and_drop";
+@import "searcher";
 

@@ -13999,12 +13999,6 @@ body .theme-back {
 body .my-sections {
   margin-top: 80px;
 }
-body .like:hover {
-  cursor: hand;
-}
-body .liked {
-  color: #dd1500;
-}
 body .posts .post:nth-child(n+2) {
   margin-top: 20px;
 }
@@ -14021,6 +14015,12 @@ body .lazyload {
 }
 body .lazyload:hover {
   cursor: hand;
+}
+body .like:hover {
+  cursor: hand;
+}
+body .liked {
+  color: #dd1500;
 }
 body .same .post:nth-child(n+2) {
   margin-top: 10px;
@@ -14059,8 +14059,6 @@ body .same {
   font-size: 18px;
   text-align: center;
   padding: 50px 0;
-  margin: 30px auto;
-  margin-bottom: 0px;
   background: #eee;
   border: 1px solid #ccc;
   -webkit-border-radius: 5px;
@@ -14081,6 +14079,21 @@ body .same {
 #dropZone.drop {
   background: #afa;
   border-color: #0f0;
+}
+
+.searcher {
+  outline: none;
+}
+
+.search-row {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+input[type=text], textarea {
+  outline: none;
+  box-shadow: none !important;
+  border: 1px solid #ccc !important;
 }
 
 /*# sourceMappingURL=style.css.map */
