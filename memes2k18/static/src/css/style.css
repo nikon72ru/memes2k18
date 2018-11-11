@@ -14016,6 +14016,9 @@ body .lazyload {
 body .lazyload:hover {
   cursor: hand;
 }
+body .same .post:nth-child(n+2) {
+  margin-top: 10px;
+}
 body .post {
   background-color: #ffffff;
   border: 1px solid #ccc;
