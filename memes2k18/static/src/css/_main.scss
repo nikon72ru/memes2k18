@@ -63,6 +63,13 @@ body {
       cursor: hand;
     }
   }
+  .same
+  {
+    .post:nth-child(n+2)
+    {
+      margin-top: 10px;
+    }
+  }
 
   .post{
     background-color: $post;
