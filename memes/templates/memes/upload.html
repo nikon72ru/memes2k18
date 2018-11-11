@@ -10,7 +10,17 @@
 
 {% include 'memes/header.html' %}
 
-<section class="upload content">
+<section class="text">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% include 'memes/text_search.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="upload">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -43,4 +53,9 @@
 </section>
 {% endif %}
 </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="{% static '/src/js/lazy.js' %}"></script>
+<script src="{% static '/src/js/like.js' %}"></script>
+<script src="{% static '/src/js/header.js' %}"></script>
+<script src="{% static '/src/js/script.js' %}"></script>
 </html>
