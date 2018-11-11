@@ -14008,7 +14008,7 @@ body .lazyload {
   color: #ffffff;
   margin-top: 20px;
   margin-bottom: 10px;
-  height: 50px;
+  height: fit-content;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 10px;
