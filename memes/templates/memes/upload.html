@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Загркзка мемов</title>
+    <title>Папка с мемисами</title>
     <link href="{% static 'src/css/style.css'%}" rel="stylesheet">
 
 </head>
@@ -11,23 +11,11 @@
 {% include 'memes/header.html' %}
 
 <section class="text">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                {% include 'memes/text_search.html' %}
-            </div>
-        </div>
-    </div>
+    {% include 'memes/text_search.html' %}
 </section>
 
 <section class="upload">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                {% include 'memes/drag_drop.html' %}
-            </div>
-        </div>
-    </div>
+    {% include 'memes/drag_drop.html' %}
 </section>
 
 {% if pic_url != '' %}
