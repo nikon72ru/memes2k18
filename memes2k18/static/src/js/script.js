@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    
+
+
     var dropZone = $('#dropZone'),
         maxFileSize = 1000000; // максимальный размер фалйа - 1 мб.
     

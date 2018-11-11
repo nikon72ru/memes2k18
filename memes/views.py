@@ -33,7 +33,11 @@ def hot(request):
     return render(request, 'memes/lenta.html', {'memes': memes})
 
 def relevant(request):
-    memes = models.Meme.objects.all()[:2]
+    try:
+        filter = request.GET.__getitem__('filter')
+    except:
+        filter = '-1'
+    memes = Utils.getFromClusterLabel(filter, 0, 10)
     return render(request, 'memes/lenta.html', {'memes': memes})
 
 @csrf_exempt
@@ -51,7 +55,10 @@ def upload_file(request):
 
 @csrf_exempt
 def get_more(request):
-    print(request.POST)
+    try:
+        filter = request.GET.__getitem__('cluster')
+    except:
+        filter = '-1'
     if request.method == 'POST':
         if 'upload' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
@@ -60,5 +67,7 @@ def get_more(request):
             return render(request, 'memes/posts.html', {'memes': Utils.getFresh(request.POST['offset'])})
         elif 'hot' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getHottest(request.POST['offset'])})
+        elif 'relevant' in request.POST['type']:
+            return render(request, 'memes/posts.html', {'memes': Utils.getFromClusterLabel(request.POST['filter'], request.POST['offset'], 10)})
 
         return HttpResponse("404")
