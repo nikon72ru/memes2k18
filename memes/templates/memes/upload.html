@@ -18,7 +18,7 @@
     {% include 'memes/drag_drop.html' %}
 </section>
 
-{% if pic_url != '' %}
+{% if has_filter %}
 <section class="same">
     <div class="container">
         <div class="row">
@@ -27,9 +27,11 @@
                 {% include 'memes/post.html' with meme=meme %}
                 {% endfor %}
             </div>
-            <div class="col-4 sample">
-                {% include 'memes/same.html' with pic_url=pic_url %}
-            </div>
+            {% if pic_url != '' %}
+                <div class="col-4 sample">
+                    {% include 'memes/same.html' with pic_url=pic_url %}
+                </div>
+            {% endif %}
         </div>
         <div class="row">
             <div class="col-8">

@@ -12,13 +12,7 @@ $(document).ready(function() {
         'offset': $('.post').length
       },
       success: function(data) {
-           console.log(data)
-           if (!first_lazy){
            $(".posts").append(data);
-           } else {
-              $(".posts").html(data);
-              first_lazy = false;
-           }
       },
       error: function(xhr, status, error) {
         // shit happens friends!

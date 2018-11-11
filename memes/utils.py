@@ -43,6 +43,8 @@ class Utils:
         if (filter==""):
             return  models.Meme.objects.order_by('?')[:10]
         clusters = filter.split(',')
+        if (len(clusters) == 1):
+            return Utils.getFromClusterText(clusters[0], offset, 10)
         fromtext = Utils.getFromClusterText(clusters[0], offset, 3)
         fromlabel = Utils.getFromClusterLabel(clusters[1], offset, 7)
         return list(chain(fromlabel, fromtext))

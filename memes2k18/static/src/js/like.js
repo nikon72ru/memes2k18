@@ -41,7 +41,11 @@ $(document).ready(function() {
 	  return a[1]-b[1]; // compare numbers
 	});
 //	console.log(sortable);
+    try{
      window.location.href = "relevant?filter=" + sortable[sortable.length-1][0].replace('cluster_', '');
+     } catch(e){
+        window.location.href = "relevant?filter=-1";
+     }
     });
 
 });
