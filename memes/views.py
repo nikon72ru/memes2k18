@@ -8,6 +8,7 @@ from .forms import UploadFileForm
 from memes.utils import Utils
 from django.views.decorators.csrf import csrf_exempt
 from memes.scripts.recognition import recognite_image_cluster
+from django.db.models import Q
 
 def fresh(request):
     memes = Utils.getFresh(0)
