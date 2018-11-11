@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    console.log(13);
+    var first_lazy = true;
     var load = $('#lazyLoadLink');
     $("#lazyLoadLink").click(function(e){
         console.log($('.post'));
@@ -13,7 +13,12 @@ $(document).ready(function() {
       },
       success: function(data) {
            console.log(data)
-           $(".posts").append(data)
+           if (!first_lazy){
+           $(".posts").append(data);
+           } else {
+              $(".posts").html(data);
+              first_lazy = false;
+           }
       },
       error: function(xhr, status, error) {
         // shit happens friends!
