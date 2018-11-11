@@ -17,11 +17,15 @@ def upload(request):
     try:
         filter = request.GET.__getitem__('filter')
         pic_url = 'users_images/' + request.GET.__getitem__('source')
+        clusters_name = filter.split(',')
+        cluster_text = models.Cluster.objects.filter(name=clusters_name[0], type='text').last()
+        cluster_label = models.Cluster.objects.filter(name=clusters_name[1], type='tag').last()
     except Exception as ex:
         filter = ''
         pic_url = ''
-    memes = models.Meme.objects.order_by('?')[:10]
-    return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
+        cluster_text = models.Cluster.objects.all()[0:0]
+        cluster_label = models.Cluster.objects.all()[0:0]
+    return render(request, 'memes/upload.html', {'memes': Utils.getForFind(filter,0 ), 'pic_url':pic_url, 'cluster_text':cluster_text, 'cluster_label':cluster_label})
 
 def hot(request):
     memes = Utils.getHottest(0)
@@ -53,5 +57,7 @@ def get_more(request):
                                                                                   request.POST['offset'])})
         elif 'fresh' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getFresh(request.POST['offset'])})
+        elif 'hot' in request.POST['type']:
+            return render(request, 'memes/posts.html', {'memes': Utils.getHottest(request.POST['offset'])})
 
         return HttpResponse("404")

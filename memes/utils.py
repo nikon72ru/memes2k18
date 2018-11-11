@@ -2,7 +2,6 @@ import os
 from random import randint
 
 from memes import models
-from django.db.models import Q
 from itertools import chain
 from memes.scripts.recognition import recognite_image_cluster
 
@@ -41,6 +40,8 @@ class Utils:
         return models.Meme.objects.order_by('-created_at').filter(cluster_label=cl)[int(offset):int(offset)+count]
 
     def getForFind(filter, offset):
+        if (filter==""):
+            return  models.Meme.objects.order_by('?')[:10]
         clusters = filter.split(',')
         fromtext = Utils.getFromClusterText(clusters[0], offset, 3)
         fromlabel = Utils.getFromClusterLabel(clusters[1], offset, 7)
