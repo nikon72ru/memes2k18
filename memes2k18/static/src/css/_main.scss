@@ -41,6 +41,17 @@ body {
     margin-top: 80px;
   }
 
+  .like
+  {
+    &:hover {
+      cursor: hand;
+    }
+  }
+
+  .liked{
+    color: #dd1500;
+  }
+
   .posts
   {
     .post:nth-child(n+2)

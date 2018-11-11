@@ -13999,6 +13999,12 @@ body .theme-back {
 body .my-sections {
   margin-top: 80px;
 }
+body .like:hover {
+  cursor: hand;
+}
+body .liked {
+  color: #dd1500;
+}
 body .posts .post:nth-child(n+2) {
   margin-top: 20px;
 }
