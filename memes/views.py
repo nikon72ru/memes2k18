@@ -8,7 +8,8 @@ from .forms import UploadFileForm
 from memes.utils import Utils
 from django.views.decorators.csrf import csrf_exempt
 from memes.scripts.recognition import recognite_image_cluster
-from django.db.models import Q
+import requests
+
 
 def fresh(request):
     memes = Utils.getFresh(0)
@@ -55,11 +56,11 @@ def upload_file(request):
 
 @csrf_exempt
 def get_more(request):
-    try:
-        filter = request.GET.__getitem__('cluster')
-    except:
-        filter = '-1'
     if request.method == 'POST':
+        try:
+            filter = request.GET.__getitem__('cluster')
+        except:
+            filter = '-1'
         if 'upload' in request.POST['type']:
             return render(request, 'memes/posts.html', {'memes': Utils.getForFind(request.POST['filter'],
                                                                                   request.POST['offset'])})
@@ -71,3 +72,18 @@ def get_more(request):
             return render(request, 'memes/posts.html', {'memes': Utils.getFromClusterLabel(request.POST['filter'], request.POST['offset'], 10)})
 
         return HttpResponse("404")
+
+
+@csrf_exempt
+def finder(request):
+    if request.method == 'POST':
+       text = request.POST['str']
+       r = requests.get(text, allow_redirects=True)
+       open('static/users_images/'+text.split('/')[-1], 'wb+').write(r.content)
+       res = recognite_image_cluster(text.split('/')[-1])
+       return HttpResponse('?filter=' + str(res[0]) + ',' + str(res[1]) + '&source=' +text.split('/')[-1])
+
+
+
+
+

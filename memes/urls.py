@@ -9,5 +9,6 @@ urlpatterns = [
     path('get_more', views.get_more, name='get_more'),
     path('hot', views.hot, name='hot'),
     path('relevant', views.relevant, name='relevant'),
+    path('finder', views.finder, name='finder'),
 ]
 

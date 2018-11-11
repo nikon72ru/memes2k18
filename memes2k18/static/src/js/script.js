@@ -1,6 +1,20 @@
 $(document).ready(function() {
 
 
+    $(".search-row").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "finder",
+            type: "POST",
+            data: {
+                str: $("#input").val()
+            },
+            success:function(r){
+                window.location.href = "upload" + r;
+            }
+        });
+    })
+
     var dropZone = $('#dropZone'),
         maxFileSize = 1000000; // максимальный размер фалйа - 1 мб.
     
