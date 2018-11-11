@@ -20,7 +20,7 @@ def upload(request):
     except Exception as ex:
         filter = ''
         pic_url = ''
-    memes = models.Meme.objects.all()[:3]
+    memes = models.Meme.objects.order_by('?')[:10]
     return render(request, 'memes/upload.html', {'memes':memes, 'pic_url':pic_url})
 
 def hot(request):
