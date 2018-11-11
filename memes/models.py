@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 
@@ -21,6 +22,7 @@ class Cluster(models.Model):
         max_length=2048,
         null=True
     )
+
     title = models.CharField(
         verbose_name='Заголовок',
         max_length=2048,
@@ -32,6 +34,14 @@ class Cluster(models.Model):
         max_length=4096,
         null = True
     )
+
+    def previews(self):
+        str = ""
+        for img in Meme.objects.filter(cluster_label=self)[:8]:
+            str = str + '<img src="%s" style="width: auto; height:100px; margin:2px;" />' % img.image_url
+        return mark_safe(str)
+
+    previews.allow_tags = True
 
 class Keywords(models.Model):
     created_at = models.DateTimeField(
